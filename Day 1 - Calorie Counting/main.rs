@@ -20,8 +20,17 @@ fn main() {
   // sum of each array
   let sum: Vec<i32> = numbers.iter().map(|line| line.iter().sum()).collect();
 
-  // max value of sum
+  // max value in sum
   let max = sum.iter().max().unwrap();
+  println!("Max value: {}", max);
 
-  println!("Max sum: {}", max);
+  // sort values in sum
+  let mut sum: Vec<i32> = sum.iter().map(|x| *x).collect();
+  sum.sort();
+
+  // sum of top 3 values
+  let len_of_arr = sum.len();
+  let sum_of_top_3 = sum[len_of_arr - 1] + sum[len_of_arr - 2] + sum[len_of_arr - 3];
+
+  println!("Sum Of Top 3: {}", sum_of_top_3);
 }
