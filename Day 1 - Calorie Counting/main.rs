@@ -1,36 +1,11 @@
-use std::fs;
-
 fn main() {
-  let file_path = "input.txt";
+  let input_text = include_str!("./input.txt");
 
-  println!("In file {}", file_path);
-
-  let contents = fs::read_to_string(file_path)
-      .expect("Should have been able to read the file");
-
-  // split string with \n\n
-  let lines: Vec<&str> = contents.split("\n\n").collect();
-
-  // split each line with \n
-  let lines: Vec<Vec<&str>> = lines.iter().map(|line| line.split("\n").collect()).collect();
-
-  // convert string to int and skip empty lines
-  let numbers: Vec<Vec<i32>> = lines.iter().map(|line| line.iter().filter(|&x| x != &"").map(|x| x.parse::<i32>().unwrap()).collect()).collect();
+  // part 1
+  println!("{}",input_text.split("\n\n").map(|e| e.lines().map(|c| c.parse::<u32>().unwrap()).sum::<u32>()).max().unwrap(),);
   
-  // sum of each array
-  let sum: Vec<i32> = numbers.iter().map(|line| line.iter().sum()).collect();
-
-  // max value in sum
-  let max = sum.iter().max().unwrap();
-  println!("Max value: {}", max);
-
-  // sort values in sum
-  let mut sum: Vec<i32> = sum.iter().map(|x| *x).collect();
-  sum.sort();
-
-  // sum of top 3 values
-  let len_of_arr = sum.len();
-  let sum_of_top_3 = sum[len_of_arr - 1] + sum[len_of_arr - 2] + sum[len_of_arr - 3];
-
-  println!("Sum Of Top 3: {}", sum_of_top_3);
+  // part 2
+  let mut calories = input_text.split("\n\n").map(|e| e.lines().map(|c| c.parse::<u32>().unwrap()).sum()).collect::<Vec<u32>>();
+  calories.sort_unstable();
+  println!("{}", calories.into_iter().rev().take(3).sum::<u32>());
 }
