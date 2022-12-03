@@ -1,7 +1,7 @@
 fn main() {
     let input_data = include_bytes!("./input.txt");
 
-    // Part 2
+    // Part 1
     println!(
         "{:?}",
         input_data
@@ -31,7 +31,6 @@ fn main() {
                 (byte - b'a') as i16 + 1
             } else {
                 (byte - b'A') as i16 + 27
-            })
-            .sum::<i16>(),
+            }).sum::<i16>(),
     );
 }
